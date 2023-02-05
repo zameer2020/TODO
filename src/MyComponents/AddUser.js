@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 function AddUser() {
   const [users, setUsers] = useState([]);
+  const [deletedUsers, setDeletedUsers] = useState([]);
   const [userName, setUserName] = useState('');
   const [editIndex, setEditIndex] = useState(null);
 
@@ -19,9 +20,14 @@ function AddUser() {
   };
 
   const handleDeleteUser = (index) => {
+    setDeletedUsers([...deletedUsers, users[index]]);
     setUsers(users.filter((user, i) => i !== index));
   };
 
+  const handleRestoreDeletedUsers = () => {
+    setUsers([...users, ...deletedUsers]);
+    setDeletedUsers([]);
+  };
 
   return (
     <div>
@@ -32,14 +38,23 @@ function AddUser() {
         onChange={(e) => setUserName(e.target.value)}
       />
       {editIndex === null ? (
-        <button onClick={handleAddUser} disabled={users.length >= 10}>
+        <button onClick={handleAddUser} disabled={users.length >= 10 || !userName.length}>
           Add User
         </button>
       ) : (
         <button onClick={handleAddUser}>Save Changes</button>
       )}
-      <List users={users} handleEditUser={handleEditUser} handleDeleteUser={handleDeleteUser} />
+      <button onClick={handleRestoreDeletedUsers} disabled={!deletedUsers.length}>
+        Restore Deleted Users
+      </button>
+      <List
+        users={users}
+        handleEditUser={handleEditUser}
+        handleDeleteUser={handleDeleteUser}
+      />
     </div>
   );
 }
 export default AddUser;
+
+
