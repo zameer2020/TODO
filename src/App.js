@@ -1,13 +1,16 @@
+
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+import './index.css';
 
 const URL = "https://api.github.com/users";
-
 
 const App = () => {
   const [usersData, setUsersData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState({ status: false, msg: "" });
-
+  const [showFollowers, setShowFollowers] = useState({});
+  
   const fetchUsersData = async (apiURL) => {
     setLoading(true);
     setIsError({ status: false, msg: "" });
@@ -49,32 +52,42 @@ const App = () => {
     );
   }
 
+  const showFollowersHandler = async (index, followers_url) => {
+    try {
+      const followersResponse = await axios.get(followers_url);
+      setShowFollowers({
+        ...showFollowers,
+        [index]: followersResponse.data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <div>
-      <h1>Assignment</h1>
+    <div className="page-content">
+      <h1 style={{ position: "fixed", margin: "0px 500px" }}>Assignment</h1>
       <ul>
-        {usersData.map((eachUser,index) => {
-          const { login,avatar_url,followers_url
-        } = eachUser;
+        {usersData.map((eachUser, index) => {
+          const { login, avatar_url, followers_url } = eachUser;
 
-        const showFollowers=(followers_url)=>{
-
-          return  {followers_url}
-        };
-
-      
           return (
-            <div>
-                <li>{login}</li>
-              <li>{avatar_url}</li>
-              <button onClick={() => showFollowers(followers_url)}> show followers</button>
-             
-              
-              </div>
-        
-
-
-            
+            <div className="card-style">
+              <li>Login: {login}</li><br />
+              <img
+                src={avatar_url}
+                alt={`${login} avatar`}
+              /><br />
+              <button onClick={() => showFollowersHandler(index, followers_url)}>
+                Show Followers
+              </button><br />
+              <ul>
+                {showFollowers[index] &&
+                  showFollowers[index].map((eachFollower) => {
+                    return <li>{eachFollower.login}</li>;
+                  })}
+              </ul>
+            </div>
           );
         })}
       </ul>
