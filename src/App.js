@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 const URL = "https://api.github.com/users";
 
 
-const Final = () => {
+const App = () => {
   const [usersData, setUsersData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState({ status: false, msg: "" });
@@ -57,15 +57,17 @@ const Final = () => {
           const { login,avatar_url,followers_url
         } = eachUser;
 
-        const showFollowers=()=>{
+        const showFollowers=(followers_url)=>{
 
           return  {followers_url}
-        }
+        };
+
+      
           return (
             <div>
                 <li>{login}</li>
               <li>{avatar_url}</li>
-              <button onClick={showFollowers}> show followers</button>
+              <button onClick={() => showFollowers(followers_url)}> show followers</button>
              
               
               </div>
@@ -80,4 +82,4 @@ const Final = () => {
   );
 };
 
-export default Final;
+export default App;
