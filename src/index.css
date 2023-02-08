@@ -28,7 +28,7 @@ img{
   }
   
   
-  .page-content{
+  /* .page-content{
     display: grid;
     grid-template-columns: minmax(90px,3fr);
     gap:1rem;
@@ -37,5 +37,16 @@ img{
     box-sizing: border-box;
     box-shadow: 10px;
     border:2px solid black; 
-  }
+  } */
   
+
+  /* .page-content{
+    display:grid;
+    grid-template-columns: 1fr ;
+    gap:1rem;
+  }
+
+  .card-style{
+    gap:2rem;
+    grid-template-columns: 1fr 1fr 1fr;
+  } */

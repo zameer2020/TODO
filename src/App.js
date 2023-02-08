@@ -10,6 +10,12 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState({ status: false, msg: "" });
   const [showFollowers, setShowFollowers] = useState({});
+//
+const [showData, setShowData] = useState(false);
+
+
+
+//
   
   const fetchUsersData = async (apiURL) => {
     setLoading(true);
@@ -57,16 +63,22 @@ const App = () => {
       const followersResponse = await axios.get(followers_url);
       setShowFollowers({
         ...showFollowers,
-        [index]: followersResponse.data,
+        [index]: followersResponse.data.slice(0,3),
       });
     } catch (error) {
       console.error(error);
     }
   };
 
+//
+const handleChange = () => {
+  setShowData(!showData);
+};
+//
+
   return (
     <div className="page-content">
-      <h1 style={{ position: "fixed", margin: "0px 500px" }}>Assignment</h1>
+      {/* <h1 style={{ position: "fixed", margin: "0px 500px" }}>Assignment</h1> */}
       <ul>
         {usersData.map((eachUser, index) => {
           const { login, avatar_url, followers_url } = eachUser;
@@ -78,11 +90,24 @@ const App = () => {
                 src={avatar_url}
                 alt={`${login} avatar`}
               /><br />
-              <button onClick={() => showFollowersHandler(index, followers_url)}>
+              <div>
+      <button onClick={handleChange}>{showData ? "hide" : "show"}</button>
+     
+      {showData ? (
+        
+           
+           <button onClick={() => showFollowersHandler(index, followers_url)}>
                 Show Followers
-              </button><br />
-              <ul>
-                {showFollowers[index] &&
+              </button>
+        
+      ) 
+      : 
+      (
+        <h6>`</h6>
+      )
+      }
+    </div> 
+    <ul>{showFollowers[index] &&
                   showFollowers[index].map((eachFollower) => {
                     return <li>{eachFollower.login}</li>;
                   })}
