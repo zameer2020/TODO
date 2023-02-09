@@ -40,20 +40,19 @@ const [showData, setShowData] = useState(false);
 
   useEffect(() => {
     fetchUsersData(URL);
-  }, []);
+  },[]);
 
   if (loading) {
     return (
       <div>
-        <h3>Loading...</h3>
+        Loading...
       </div>
     );
   }
 
   if (isError?.status) {
     return (
-      <div>
-        <h3 style={{ color: "red" }}>{isError?.msg}</h3>
+      <div style={{ color: "red" }}>{isError?.msg}
       </div>
     );
   }
@@ -93,8 +92,7 @@ const handleChange = () => {
               <div>
       <button onClick={handleChange}>{showData ? "hide" : "show"}</button>
      
-      {showData ? (
-        
+      {showData ? (        
            
            <button onClick={() => showFollowersHandler(index, followers_url)}>
                 Show Followers
@@ -103,7 +101,7 @@ const handleChange = () => {
       ) 
       : 
       (
-        <h6>`</h6>
+        ""
       )
       }
     </div> 

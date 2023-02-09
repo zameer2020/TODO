@@ -1,15 +1,26 @@
 
-img{
-    border-radius: 50%;
-    width:50px;
-    height: 50px;
+
+
+ img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
 }
 
+button {
+  background-color: rgba(102, 255, 0, 0.219);
+  color: rgb(4, 17, 1);
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
 
-/* .page-content {
-    display: grid;
-    flex-wrap: wrap;
-    flex-direction: column;
+.page-content {
+    display: flex;
+    /* flex-wrap: wrap; */
+    /* flex-direction: column; */
  
   } */
   
@@ -21,10 +32,11 @@ img{
     box-sizing: border-box;
     box-shadow: 10px;
     border:2px solid black;    
-    display: grid;
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    
   }
   
   
@@ -49,4 +61,23 @@ img{
   .card-style{
     gap:2rem;
     grid-template-columns: 1fr 1fr 1fr;
-  } */
+  }  */
+
+/*
+  .page-content {
+    margin: 0px 50px;
+  }
+  */
+.card-style {
+    border: 1px solid gray;
+    padding: 10px;
+    margin: 10px 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  } 
+  
+
+  
+ 
+  
